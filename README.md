@@ -57,6 +57,8 @@ This project focuses on simplifying catering operations by providing features su
 ---
 
 ##  Project Structure
+
+```
 online-catering-management-system
 
 │── app.py
@@ -73,6 +75,8 @@ online-catering-management-system
 │ └── JavaScript
 │
 └── README.md
+
+```
 
 #  How to Run the Project
 
