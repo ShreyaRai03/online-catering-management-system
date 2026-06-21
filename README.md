@@ -1,4 +1,4 @@
-# Online Catering Management System
+# Online Catering Management System - Flask Web Application
 
 ##  Project Overview
 
@@ -104,6 +104,12 @@ Follow these steps to run the application locally.
 7. Open in Browser
    Open:
    http://127.0.0.1:5000/
+
+###  Key Highlights
+- Built a full-stack web application using Flask
+- Implemented OTP-based email verification system
+- Managed dynamic data using CSV-based storage
+- Developed role-based modules for customers and service providers
 
 ### Project Objectives
 
