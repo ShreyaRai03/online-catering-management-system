@@ -105,11 +105,6 @@ Follow these steps to run the application locally.
    Open:
    http://127.0.0.1:5000/
 
-###  Key Highlights
-- Built a full-stack web application using Flask
-- Implemented OTP-based email verification system
-- Managed dynamic data using CSV-based storage
-- Developed role-based modules for customers and service providers
 
 ### Project Objectives
 
@@ -117,6 +112,12 @@ Follow these steps to run the application locally.
 - To simplify customer and catering provider interaction
 - To reduce manual handling of catering information
 - To provide an efficient platform for managing catering operations
+
+###  Key Highlights
+- Built a full-stack web application using Flask
+- Implemented OTP-based email verification system
+- Managed dynamic data using CSV-based storage
+- Developed role-based modules for customers and service providers
 
 ### Future Enhancements
 - Integration with MySQL database
