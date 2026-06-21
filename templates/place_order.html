@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #ff4e50;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 3rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ffebee;
+            border-left: 4px solid #ff4e50;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Form Styles */
+        form {
+            margin-top: 15px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: linear-gradient(to right, #ff4e50, #f9d423);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(to right, #ff4e50, #f05f5f);
+        }
+        input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        ul li label {
+            display: inline;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff4e50;
+            color: white;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #ffeeee;
+        }
+        tbody tr:hover {
+            background-color: #ffd1d1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th, td {
+                text-align: left;
+                padding: 10px;
+                border: none;
+                display: flex;
+                justify-content: space-between;
+            }
+            th {
+                background-color: transparent;
+                font-weight: bold;
+            }
+            tbody tr {
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Place Your Order</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Step 1: Customer Login and Area Selection -->
+        {% if not available_providers and not order_details and not final_order_summary %}
+        <section class="login">
+            <h2>Step 1: Login and Select Area</h2>
+            <form method="POST">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+
+                <label for="area">Area:</label>
+                <input type="text" name="area" id="area" required>
+
+                <button type="submit" name="find_providers">Find Providers</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <!-- Step 2: Display Available Providers -->
+        {% if available_providers %}
+        <section class="providers">
+            <h2>Step 2: Choose a Service Provider</h2>
+            <form method="POST">
+                <ul>
+                    {% for provider in available_providers %}
+                    <li>
+                        <input type="radio" name="provider_choice" id="provider_{{ loop.index }}" value="{{ loop.index }}" required>
+                        <label for="provider_{{ loop.index }}">{{ provider[2] }} - {{ provider[4] }}</label>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="select_provider">Select Provider</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <!-- Step 3: Display Order Details -->
+        {% if order_details %}
+        <section class="order">
+            <h2>Step 3: Select Items and Quantities</h2>
+            <form method="POST">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Rate</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order_details %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>₹{{ item.rate }}</td>
+                            <td>
+                                <input type="number" name="quantity_{{ item.name }}" min="0" value="0">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" name="finalize_order">Finalize Order</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <!-- Step 4: Confirm and Submit Order -->
+        {% if final_order_summary %}
+        <section class="summary">
+            <h2>Step 4: Confirm Your Order</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in final_order_summary %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹{{ item.rate }}</td>
+                        <td>₹{{ item.quantity * item.rate }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3>Total Cost: ₹{{ total_cost }}</h3>
+            <form method="POST">
+                <label for="address">Delivery Address:</label>
+                <input type="text" name="address" id="address" required>
+
+                <label for="date">Delivery Date:</label>
+                <input type="date" name="date" id="date" required>
+
+                <button type="submit" name="submit_order">Submit Order</button>
+            </form>
+        </section>
+        {% endif %}
+    </div>
+</body>
+</html>

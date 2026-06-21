@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Busy Dates</title>
+</head>
+<body>
+    <h1>Set Busy Dates</h1>
+    <form action="/set_busy_dates" method="POST">
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+        <label>Busy Dates (comma-separated, e.g., 2024-11-25,2024-11-26):</label>
+        <input type="text" name="busy_dates" required><br>
+        <button type="submit">Save Busy Dates</button>
+    </form>
+</body>
+</html>

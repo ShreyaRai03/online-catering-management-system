@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #444;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff5e57;
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-weight: 600;
+            text-align: left;
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-control:focus {
+            border-color: #ff5e57;
+            box-shadow: 0 0 8px rgba(255, 94, 87, 0.3);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6a88, #ff4466);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff4466, #ff6a88);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background: #f2f2f2;
+            color: #888;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            color: #555;
+        }
+        .back-link a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ff5e57;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+            color: #e94e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Signup</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+        </form>
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary w-100 mt-3">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
