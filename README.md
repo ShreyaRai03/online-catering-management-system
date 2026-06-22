@@ -127,11 +127,12 @@ Follow these steps to run the application locally.
 - Cloud deployment
 - Improved user interface
 
-### Author
+## Author
 Shreya
 
 Aspiring Software Engineer | Machine Learning Enthusiast | Python Developer
 
-### If you like this project
+
+## If you like this project
 
 Give it a ⭐ on GitHub and feel free to contribute or improve it!
